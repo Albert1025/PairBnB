@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<% @listings.each do |listing| %>
+
+	<%= listing.owner %><br/>
+	<%= listing.address %>
+	<p>Price: $<%= listing.price %></p>
+	<p>No. of Guests: <%= listing.guests %></p>
+	<p>Property Type: <%= listing.property_type %></p>
+
+<% end %>

@@ -1,22 +1,33 @@
 <%= form_for :session, url: session_path do |form| %>
-  <div class="text-field">
-    <%= form.label :email %>
+  <form>
+  <div class="form-group">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <label for="exampleInputEmail1">    <%= form.label :email %></label> <br/>  
     <%= form.text_field :email, type: 'email' %>
   </div>
 
-  <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+  <div class="form-group">
+    <label for="exampleInputPassword1"> <%= form.label :password %></label> <br/>
+        <%= form.password_field :password %>
   </div>
 
-  <div class="submit-field">
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+    <div class="submit-field btn">
     <%= form.submit %>
   </div>
 
+</form>
   <div class="other-links">
     <% if Clearance.configuration.allow_sign_up? %>
       <%= link_to t(".sign_up"), sign_up_path %>
+          <a class="nav-link" href="/auth/facebook"><img src="https://hybridtechcar.com/wp-content/uploads/2018/04/fb_icon_325x325.png" width="30px"/> Sign in with Facebook!</a>
     <% end %>
+    <br/>
     <%= link_to t(".forgot_password"), new_password_path %>
   </div>
+
 <% end %>

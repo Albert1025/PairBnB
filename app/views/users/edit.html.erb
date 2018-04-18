@@ -1,0 +1,15 @@
+<%= form_for @user do |t| %>
+
+	<%= t.label :email %>
+	<%= t.text_field :email, :readonly =>"true" %>
+<br/>
+	<%= t.label :password %>
+	<%= t.text_field :password %>
+<br/>
+	<%= t.label :image %>
+	<%= t.file_field :avatar %>
+
+
+	<%= t.submit %>
+
+<% end %>

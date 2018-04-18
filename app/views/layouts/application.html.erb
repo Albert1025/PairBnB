@@ -1,24 +1,155 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 </head>
-<body>
-  <div id="header">
-    <% if signed_in? -%>
+<body style="require listings">
+<%= csrf_meta_tags %>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link" ><%= link_to "Home", "/" %></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link active"> <% if signed_in? %>
+    Signed in as: <%= current_user.email %> 
+    
+    <div class='avatar'>
+    <% if !current_user.avatar.nil? %>
+      <%= image_tag current_user.avatar.url.to_s %>
+    <% end %>
+    </div>
+
+    <!-- <div><%= link_to 'edit profile', edit_user_path(current_user) %>
+    </div> -->
+
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
-  </div>
+ </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="/auth/facebook"><img src="https://hybridtechcar.com/wp-content/uploads/2018/04/fb_icon_325x325.png" width="30px"/> </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"><%= link_to "Show listings", "/listings" %></a>
+    <a class="nav-link"><%= link_to "My listings", "/user/listings" %></a>
+
+  </li>
+
+</ul>
+  
 
   <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
+
   </div>
 
+  
+  <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>"><%=h value %></div>
+    <% end %>
   <%= yield %>
-</body>
+</body> 
+
+<script>
+require listings
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({format: "DD-MM-YYYY"});
+        
+        $('#datetimepicker7').datetimepicker({
+          format: "DD-MM-YYYY",
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+<script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+
+<script type='text/javascript'>
+var form = document.querySelector('#cardForm');
+var submit = document.querySelector("#submit-payment-btn");
+var authorization = '<%= @client_token %>';
+
+braintree.client.create({
+  // Replace this with your own authorization.
+  authorization: authorization
+}, function (clientErr, clientInstance) {
+  if (clientErr) {
+    // Handle error in client creation
+    return;
+  }
+
+  braintree.hostedFields.create({
+    client: clientInstance,
+    styles: {
+      'input': {
+        'font-size': '14pt'
+      },
+      'input.invalid': {
+        'color': 'red'
+      },
+      'input.valid': {
+        'color': 'green'
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '4111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: '10/2019'
+      }
+    }
+  }, function (hostedFieldsErr, hostedFieldsInstance) {
+    if (hostedFieldsErr) {
+      // Handle error in Hosted Fields creation
+      return;
+    }
+
+    submit.removeAttribute('disabled');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+        if (tokenizeErr) {
+          // Handle error in Hosted Fields tokenization
+          return;
+        }
+
+        // Put `payload.nonce` into the `payment_method_nonce` input, and then
+        // submit the form. Alternatively, you could send the nonce to your server
+        // with AJAX.
+        document.querySelector('input[name="checkout_form[payment_method_nonce]"]').value = payload.nonce;
+        form.submit();
+      });
+    }, false);
+  });
+});
+
+
+</script>
+
 </html>

@@ -1,3 +1,17 @@
-<%= link_to "Sign In", sign_in_path %>
-<%= link_to "Sign Up", sign_up_path %>
-<%= link_to "Log Out", sign_out_path, method: :delete %>
+<h1 class="sign_out">Welcome to PairBnb!!</h1>
+
+
+  <div class="row">
+    <div class="col-sm">
+     <%= link_to "Sign In", sign_in_path %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Sign Up", sign_up_path %>
+    </div>
+    <div class="col-sm">
+     <%= link_to "Log Out", sign_out_path, method: :delete %>
+    </div>
+    <div>
+        <a class="nav-link" href="/auth/facebook"><img src="https://hybridtechcar.com/wp-content/uploads/2018/04/fb_icon_325x325.png" width="30px"/>Sign in with Facebook! </a>
+        </div>
+  </div>
