@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<%= form_for @listing do |t| %>
+
+	<%= t.label :owner %>
+	<%= t.text_field :owner %>
+<br/>
+	<%= t.label :address %>
+	<%= t.text_field :address %>
+<br/>
+	<%= t.label :property_type %>
+	<%= t.text_field :property_type %>
+<br/>
+	<%= t.label :place_type %>
+	<%= t.text_field :place_type %>
+<br/>
+	<%= t.label :price %>
+	<%= t.text_field :price %>
+<br/>
+	<%= t.label :guests %>
+	<%= t.text_field :guests %>
+<br/>
+	<%= t.label :contact %>
+	<%= t.text_field :contact %>
+<br/>
+	<%= t.submit %>
+
+<% end %>

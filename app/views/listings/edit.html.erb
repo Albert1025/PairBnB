@@ -1,0 +1,27 @@
+
+<%= form_for @listing do |t| %>
+
+	<%= t.label :owner %>
+	<%= t.text_field :owner %>
+<br/>
+	<%= t.label :address %>
+	<%= t.text_field :address %>
+<br/>
+	<%= t.label :property_type %>
+	<%= t.text_field :property_type %>
+<br/>
+	<%= t.label :place_type %>
+	<%= t.text_field :place_type %>
+<br/>
+	<%= t.label :price %>
+	<%= t.text_field :price %>
+<br/>
+	<%= t.label :guests %>
+	<%= t.text_field :guests %>
+<br/>
+	<%= t.label :contact %>
+	<%= t.text_field :contact %>
+
+	<%= t.submit %>
+
+<% end %>

@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem "clearance"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'
 # Use postgresql as the database for Active Record
@@ -51,3 +51,34 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+gem "figaro"
+
+gem 'omniauth-facebook'
+
+gem 'omniauth'
+
+gem 'faker'
+
+gem 'listings'
+
+gem 'will_paginate', '~> 3.1.0'
+
+gem 'braintree'
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
+gem "fog-aws"
+
+gem 'momentjs-rails', '>= 2.9.0'
+
+gem 'acts-as-taggable-on', '~> 4.0'
+
+gem 'bootstrap-sass', '~> 3.3.7'
+
+
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'

@@ -1,0 +1,15 @@
+<div id="clearance" class="sign-up">
+  <h2><%= t(".title") %></h2>
+
+  <%= form_for @user do |form| %>
+    <%= render partial: '/users/form', object: form %>
+       <a class="nav-link" href="/auth/facebook"><img src="https://hybridtechcar.com/wp-content/uploads/2018/04/fb_icon_325x325.png" width="30px"/>Sign in with Facebook! </a>
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <div class="other-links">
+      <%= link_to t(".sign_in"), sign_in_path %>
+    </div>
+  <% end %>
+</div>

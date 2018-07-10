@@ -1,0 +1,44 @@
+<html>
+<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<h1><%= link_to 'Add new Listing', new_listing_path %></h1>
+
+
+
+<br/>
+<% @listings.each do |listing| %>
+	<div class="property_listings">
+	<p>Email: <%= link_to listing.owner, listing_path(listing) %></p>
+	<p>Address: <%= listing.address %></p>
+	<p>Price: $<%= listing.price %></p>
+	<p>No. of Guests: <%= listing.guests %></p>
+	<p>Property Type: <%= listing.property_type %></p>
+	<h2><%= link_to 'Book now', new_listing_reservation_path(listing) %> </h2>
+	<br/>
+
+	<%= link_to 'Edit', edit_listing_path(listing) %>
+
+	<%= link_to 'Delete', listing, method: :delete %>
+		<br/>
+			<br/>
+
+	<% listing.reservations.each do |reservation| %>
+		booked by:<%= reservation.email %><br/>
+		check in: <%= reservation.date_in %><br/>
+		check out: <%= reservation.date_out %><br/>
+	<% end %>
+
+
+	</div>
+	<br/>
+
+<% end %>
+
+
+
+	<h3><%= will_paginate @listings %></h3>	
+</body>
+
+</html>
